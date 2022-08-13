@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            background-color: black;
+            margin: auto;
+            width: 700px;
+            height: 600px;
+
+        }
+
+        .btn {
+            text-align: center;
+            width: 230px;
+            height: 198px;
+            margin: 0;
+            background-color: lightseagreen;
+            font-size: 150px;
+        }
+    </style>
+    <script>
+        let isx = false;
+        let x = "";
+        let o = "";
+        let move = 0;
+        const winner = ["123", "456", "789", "159", "357", "369", "258", "147"]
+        function start(a) {
+            if (event.target.innerText == "") {
+                if (isx == true) {
+                    event.target.innerText = "x"
+                    x += a.toString();
+                    move += 1;
+                    if (move >= 5) {
+                        checkwinner();
+                    }
+                    isx = false;
+                } else {
+                    event.target.innerText = "o";
+                    o += a.toString();
+                    move += 1;
+                    if (move >= 5) {
+                        checkwinner();
+                    }
+                    isx = true;
+                }
+            }
+        }
+        function checkwinner() {
+            for (let i = 0; i < winner.length; i++) {
+                winnerpositions = winner[i].split("");
+                let threetowin = 0;
+                if (isx == true) {
+                    for (let z = 0; z < winnerpositions.length; z++) {
+                        if (x.includes(winnerpositions[z])) {
+                            threetowin += 1
+                            if (threetowin == 3) {
+                                alert("x is winner!")
+                                document.location.reload(true)
+                            }
+                        }
+                    }
+                } else {
+                    for (let z = 0; z < winnerpositions.length; z++) {
+                        if (o.includes(winnerpositions[z])) {
+                            threetowin += 1
+                            if (threetowin == 3) {
+                                alert("o is winner!")
+                                document.location.reload(true)
+                            }
+                        }
+                    }
+                }
+
+            }
+            move == 9 && document.location.reload(true)
+
+        }
+    </script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="btn" onclick="start(1)"></div>
+        <div class="btn" onclick="start(2)"></div>
+        <div class="btn" onclick="start(3)"></div>
+        <div class="btn" onclick="start(4)"></div>
+        <div class="btn" onclick="start(5)"></div>
+        <div class="btn" onclick="start(6)"></div>
+        <div class="btn" onclick="start(7)"></div>
+        <div class="btn" onclick="start(8)"></div>
+        <div class="btn" onclick="start(9)"></div>
+    </div>
+    <input type="button" value="reset" onClick="document.location.reload(true)">
+</body>
+
+</html>
